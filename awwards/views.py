@@ -146,10 +146,18 @@ def index(request):
 
     try:
         posts = Post.objects.all()
-        posts = posts[::-1]
-        a_post = random.randint(0, len(posts)-1)
-        random_post = posts[a_post]
-        print(random_post.photo)
+        if len(posts)!=0 :
+            posts = posts[::-1]
+            a_post = random.randint(0, len(posts)-1)
+            random_post = posts[a_post]
+        posts = 'no post yet'
+        random_post = "none"
+       
+   
     except Post.DoesNotExist:
-        posts = None
+        posts = 'no post yet'
+        random_post = "none"
+        print(random_post.photo)
+        
+
     return render(request, 'index.html', {'posts': posts, 'form': form , 'random_post': random_post})                 
